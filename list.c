@@ -103,9 +103,8 @@ void pushCurrent(List * list, void * data) {
         list->tail = new;
     }
     else if (list->current == list->head){
-        new->next = list->current;
-        list->current->prev = new;
-        list->head = new;
+        new->prev = list->current;
+        list->current->next = new;
     }
     else if (list->current == NULL){
         list->tail->next = new;
@@ -113,10 +112,10 @@ void pushCurrent(List * list, void * data) {
         list->tail = new;
     }
     else{
-        new->next = list->current;
-        new->prev = list->current->prev;
-        list->current->prev->next = new;
-        list->current->prev = new;
+        new->next = list->current->prev;
+        new->prev = list->current;
+        list->current->next = new;
+        list->current->next->prev = new;
     }
 }
 

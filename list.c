@@ -71,6 +71,7 @@ void pushFront(List * list, void * data) {
     Node * new = createNode(data);
     if (list->head == NULL){
         list->head = new;
+        list->current = new;
         list->tail = new;
     }
     else{
@@ -84,6 +85,7 @@ void pushBack(List * list, void * data) {
     Node * new = createNode(data);
     if(list->head == NULL){
         list->head = new;
+        list->current = new;
         list->tail = new;
     }
     else {
@@ -94,6 +96,18 @@ void pushBack(List * list, void * data) {
 }
 
 void pushCurrent(List * list, void * data) {
+    Node * new = createNode(data);
+    if (list->head == NULL){
+        list->head = new;
+        list->current = new;
+        list->tail = new;
+    }
+    else{
+        new->next = list->current;
+        new->prev = list->current->prev;
+        list->current->prev->next = new;
+        list->current->prev = new;
+    }
 }
 
 void * popFront(List * list) {
